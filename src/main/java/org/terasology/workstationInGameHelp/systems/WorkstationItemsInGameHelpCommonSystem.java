@@ -26,7 +26,8 @@ import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.inGameHelp.ItemsCategoryInGameHelpRegistry;
 import org.terasology.registry.In;
 import org.terasology.registry.Share;
-import org.terasology.workstation.process.ProcessRelatedAssets;
+import org.terasology.workstation.process.DescribeProcess;
+import org.terasology.workstation.process.ProcessPartDescription;
 import org.terasology.workstation.process.WorkstationProcess;
 import org.terasology.workstation.system.WorkstationRegistry;
 import org.terasology.workstationInGameHelp.WorkstationProcessRelatedAssetCache;
@@ -59,20 +60,24 @@ public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem 
                 .forEach(x -> processTypesWithAutoRegistration.add(x.getName()));
 
         for (WorkstationProcess process : workstationRegistry.getWorkstationProcesses(processTypesWithAutoRegistration)) {
-            if (process instanceof ProcessRelatedAssets) {
-                ProcessRelatedAssets processRelatedAssets = (ProcessRelatedAssets) process;
-                for (ResourceUrn assetUrn : processRelatedAssets.getInputRelatedAssets()) {
-                    inputAssetsToWorkstationProcesses.put(assetUrn, process);
-                    Optional<Prefab> assetPrefab = Assets.get(assetUrn, Prefab.class);
-                    if (assetPrefab.isPresent()) {
-                        itemsCategoryInGameHelpRegistry.addKnownPrefab(assetPrefab.get(), new InputProcessesHelpItem(assetUrn, this, workstationRegistry));
+            if (process instanceof DescribeProcess) {
+                DescribeProcess processRelatedAssets = (DescribeProcess) process;
+                for (ProcessPartDescription processPartDescription : processRelatedAssets.getInputDescriptions()) {
+                    if (processPartDescription.getResourceUrn() != null) {
+                        inputAssetsToWorkstationProcesses.put(processPartDescription.getResourceUrn(), process);
+                        Optional<Prefab> assetPrefab = Assets.get(processPartDescription.getResourceUrn(), Prefab.class);
+                        if (assetPrefab.isPresent()) {
+                            itemsCategoryInGameHelpRegistry.addKnownPrefab(assetPrefab.get(), new InputProcessesHelpItem(processPartDescription.getResourceUrn(), this, workstationRegistry));
+                        }
                     }
                 }
-                for (ResourceUrn assetUrn : processRelatedAssets.getOutputRelatedAssets()) {
-                    outputAssetsToWorkstationProcesses.put(assetUrn, process);
-                    Optional<Prefab> assetPrefab = Assets.get(assetUrn, Prefab.class);
-                    if (assetPrefab.isPresent()) {
-                        itemsCategoryInGameHelpRegistry.addKnownPrefab(assetPrefab.get(), new OutputProcessesHelpItem(assetUrn, this, workstationRegistry));
+                for (ProcessPartDescription processPartDescription : processRelatedAssets.getOutputDescriptions()) {
+                    if (processPartDescription.getResourceUrn() != null) {
+                        outputAssetsToWorkstationProcesses.put(processPartDescription.getResourceUrn(), process);
+                        Optional<Prefab> assetPrefab = Assets.get(processPartDescription.getResourceUrn(), Prefab.class);
+                        if (assetPrefab.isPresent()) {
+                            itemsCategoryInGameHelpRegistry.addKnownPrefab(assetPrefab.get(), new OutputProcessesHelpItem(processPartDescription.getResourceUrn(), this, workstationRegistry));
+                        }
                     }
                 }
             }
