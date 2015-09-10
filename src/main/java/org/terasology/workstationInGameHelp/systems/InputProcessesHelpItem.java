@@ -16,14 +16,19 @@
 package org.terasology.workstationInGameHelp.systems;
 
 import com.google.common.collect.Lists;
+import org.terasology.asset.Assets;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.inGameHelp.components.HelpItem;
 import org.terasology.inGameHelp.ui.WidgetFlowRenderable;
+import org.terasology.rendering.assets.texture.TextureRegion;
 import org.terasology.rendering.nui.widgets.browser.data.ParagraphData;
 import org.terasology.rendering.nui.widgets.browser.data.basic.FlowParagraphData;
+import org.terasology.rendering.nui.widgets.browser.data.basic.flow.ImageFlowRenderable;
+import org.terasology.rendering.nui.widgets.browser.data.basic.flow.TextFlowRenderable;
+import org.terasology.workstation.process.DescribeProcess;
+import org.terasology.workstation.process.ProcessPartDescription;
 import org.terasology.workstation.process.WorkstationProcess;
 import org.terasology.workstation.system.WorkstationRegistry;
-import org.terasology.workstation.ui.ProcessSummaryWidget;
 import org.terasology.workstationInGameHelp.WorkstationProcessRelatedAssetCache;
 
 import java.util.List;
@@ -50,13 +55,66 @@ public class InputProcessesHelpItem implements HelpItem {
     @Override
     public Iterable<ParagraphData> getParagraphs() {
         List<ParagraphData> result = Lists.newLinkedList();
-        for (WorkstationProcess workstationProcess : workstationProcessRelatedAssetCache.getInputRelatedWorkstationProcesses(resourceUrn)) {
-            FlowParagraphData paragraphData = new FlowParagraphData(null);
-            paragraphData.append(new WidgetFlowRenderable(new ProcessSummaryWidget(workstationProcess), 550, 48, null));
-            result.add(paragraphData);
+        List<WorkstationProcess> relatedWorkstationProcesses = Lists.newLinkedList(workstationProcessRelatedAssetCache.getInputRelatedWorkstationProcesses(resourceUrn));
+        relatedWorkstationProcesses.sort((x, y) -> x.getProcessType().compareTo(y.getProcessType()));
+        String lastSeenProcessType = null;
+        for (WorkstationProcess workstationProcess : relatedWorkstationProcesses) {
+            if (!workstationProcess.getProcessType().equals(lastSeenProcessType)) {
+                lastSeenProcessType = workstationProcess.getProcessType();
+
+                // add in a title for this process
+                FlowParagraphData titleParagraphData = new FlowParagraphData(null);
+                titleParagraphData.append(new TextFlowRenderable(workstationProcess.getProcessTypeName(), null, null));
+                result.add(titleParagraphData);
+            }
+
+            result.addAll(getWorkStationProcessParagraphData(workstationProcess));
         }
 
         return result;
+    }
+
+    static List<ParagraphData> getWorkStationProcessParagraphData(WorkstationProcess workstationProcess) {
+        List<ParagraphData> processParagraphData = Lists.newLinkedList();
+
+        FlowParagraphData paragraphData = new FlowParagraphData(null);
+        TextureRegion plusTexture = Assets.getTextureRegion("workstation:plus").get();
+        ImageFlowRenderable plus = new ImageFlowRenderable(plusTexture, plusTexture.getWidth(), plusTexture.getWidth(), null);
+        TextureRegion eqTexture = Assets.getTextureRegion("workstation:equals").get();
+        ImageFlowRenderable eq = new ImageFlowRenderable(eqTexture, eqTexture.getWidth(), eqTexture.getWidth(), null);
+
+        if (workstationProcess instanceof DescribeProcess) {
+            DescribeProcess describeProcess = (DescribeProcess) workstationProcess;
+            boolean isFirst = true;
+            // add all input widgets
+            for (ProcessPartDescription inputDesc : describeProcess.getInputDescriptions()) {
+                if (!isFirst) {
+                    paragraphData.append(plus);
+                }
+                isFirst = false;
+                String hyperlink = inputDesc.getResourceUrn() != null ? inputDesc.getResourceUrn().toString() : null;
+                paragraphData.append(new WidgetFlowRenderable(inputDesc.getWidget(), 48, 48, hyperlink));
+            }
+
+            // add the equals separator
+            paragraphData.append(eq);
+
+            // add the output widgets
+            isFirst = true;
+            for (ProcessPartDescription outputDesc : describeProcess.getOutputDescriptions()) {
+                if (!isFirst) {
+                    paragraphData.append(plus);
+                }
+                isFirst = false;
+                String hyperlink = outputDesc.getResourceUrn() != null ? outputDesc.getResourceUrn().toString() : null;
+                paragraphData.append(new WidgetFlowRenderable(outputDesc.getWidget(), 32, 32, hyperlink));
+            }
+        } else {
+            paragraphData.append(new TextFlowRenderable(workstationProcess.getId() + " cannot be displayed", null, null));
+        }
+
+        processParagraphData.add(paragraphData);
+        return processParagraphData;
     }
 
     @Override
