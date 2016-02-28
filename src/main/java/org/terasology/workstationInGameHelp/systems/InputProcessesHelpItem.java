@@ -16,7 +16,7 @@
 package org.terasology.workstationInGameHelp.systems;
 
 import com.google.common.collect.Lists;
-import org.terasology.asset.Assets;
+import org.terasology.utilities.Assets;
 import org.terasology.assets.ResourceUrn;
 import org.terasology.inGameHelp.components.HelpItem;
 import org.terasology.inGameHelp.ui.WidgetFlowRenderable;
