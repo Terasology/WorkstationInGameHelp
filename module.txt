@@ -1,13 +1,13 @@
 {
     "id" : "WorkstationInGameHelp",
-    "version" : "0.1.0-SNAPSHOT",
+    "version" : "1.0.0-SNAPSHOT",
     "author" : "",
     "displayName" : "WorkstationInGameHelp",
     "description" : "",
     "dependencies" : [
         {
             "id" : "Workstation",
-            "minVersion" : "0.1.1"
+            "minVersion" : "1.0.0"
         },
         {
             "id" : "InGameHelp",
