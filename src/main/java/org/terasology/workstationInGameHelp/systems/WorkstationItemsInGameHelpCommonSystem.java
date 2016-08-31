@@ -59,6 +59,8 @@ public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem 
                 .filter(x -> x.hasComponent(ParticipateInItemCategoryInGameHelpComponent.class))
                 .forEach(x -> processTypesWithAutoRegistration.add(x.getName()));
 
+        Collection<WorkstationProcess> processes = workstationRegistry.getWorkstationProcesses(processTypesWithAutoRegistration);
+
         for (WorkstationProcess process : workstationRegistry.getWorkstationProcesses(processTypesWithAutoRegistration)) {
             if (process instanceof DescribeProcess) {
                 DescribeProcess processRelatedAssets = (DescribeProcess) process;

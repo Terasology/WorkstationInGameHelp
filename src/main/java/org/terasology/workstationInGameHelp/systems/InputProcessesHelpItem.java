@@ -53,6 +53,11 @@ public class InputProcessesHelpItem implements HelpItem {
     }
 
     @Override
+    public String getCategory() {
+        return "";
+    }
+
+    @Override
     public Iterable<ParagraphData> getParagraphs() {
         List<ParagraphData> result = Lists.newLinkedList();
         List<WorkstationProcess> relatedWorkstationProcesses = Lists.newLinkedList(workstationProcessRelatedAssetCache.getInputRelatedWorkstationProcesses(resourceUrn));

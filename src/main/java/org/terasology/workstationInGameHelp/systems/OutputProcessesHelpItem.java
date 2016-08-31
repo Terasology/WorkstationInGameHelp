@@ -47,6 +47,11 @@ public class OutputProcessesHelpItem implements HelpItem {
     }
 
     @Override
+    public String getCategory() {
+        return "";
+    }
+
+    @Override
     public Iterable<ParagraphData> getParagraphs() {
         List<ParagraphData> result = Lists.newLinkedList();
         List<WorkstationProcess> relatedWorkstationProcesses = Lists.newLinkedList(workstationProcessRelatedAssetCache.getOutputRelatedWorkstationProcesses(resourceUrn));
