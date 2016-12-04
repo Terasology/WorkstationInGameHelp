@@ -17,5 +17,9 @@ package org.terasology.workstationInGameHelp.components;
 
 import org.terasology.entitySystem.Component;
 
+/**
+ * Component for allowing classes lacking a ItemHelpComponent to add items to the Item Help Inventory
+*/
+
 public class ParticipateInItemCategoryInGameHelpComponent implements Component {
 }
