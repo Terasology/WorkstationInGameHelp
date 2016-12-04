@@ -20,6 +20,12 @@ import org.terasology.workstation.process.WorkstationProcess;
 
 import java.util.Collection;
 
+Add the ability for other modules to add items to the item help categ…
+…ory that will not necessarily have a ItemHelpComponent.
+    
+/**
+ *Interface for allowing other modules which lack a ItemHelpComponent to add items to the item help category 
+*/
 public interface WorkstationProcessRelatedAssetCache {
     Collection<WorkstationProcess> getInputRelatedWorkstationProcesses(ResourceUrn resourceUrn);
 
