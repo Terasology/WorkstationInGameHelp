@@ -1,7 +1,7 @@
 {
     "id" : "WorkstationInGameHelp",
     "version" : "1.0.0-SNAPSHOT",
-    "author" : "Josharias",
+    "author" : "Josharias, xrtariq2594, Cervator",
     "displayName" : "WorkstationInGameHelp",
     "description" : "A module which ties workstation processes to items in the InGameHelp module.",
     "dependencies" : [
