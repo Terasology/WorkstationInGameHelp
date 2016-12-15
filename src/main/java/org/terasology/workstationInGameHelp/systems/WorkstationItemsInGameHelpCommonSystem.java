@@ -37,23 +37,37 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * System that handles the resource urns and workstation processes of the prefabs that have the {@link org.terasology.workstationInGameHelp.components.ParticipateInItemCategoryInGameHelpComponent}.
+ */
 @RegisterSystem
 @Share(WorkstationProcessRelatedAssetCache.class)
 public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem implements WorkstationProcessRelatedAssetCache {
+    /** Reference to the {@link org.terasology.inGameHelp.ItemsCategoryInGameHelpRegistry} that is used to add workstation help items. */
     @In
     ItemsCategoryInGameHelpRegistry itemsCategoryInGameHelpRegistry;
+    
+    /** Reference to the workstation registry that is used to get workstation processes. */
     @In
     WorkstationRegistry workstationRegistry;
 
+    /** Maps resource urns to input related workstation processes. */
     Multimap<ResourceUrn, WorkstationProcess> inputAssetsToWorkstationProcesses = HashMultimap.create();
+
+    /** Maps resource urns to output related workstation processes. */
     Multimap<ResourceUrn, WorkstationProcess> outputAssetsToWorkstationProcesses = HashMultimap.create();
 
+    /**
+     * Fills the workstation registry with input and output processes help items.
+     * Fills the input and output workstation processes maps with the cooresponding resourceUrn and workstation process.
+     */
     @Override
     public void postBegin() {
         super.postBegin();
 
         Set<String> processTypesWithAutoRegistration = Sets.newHashSet();
 
+        //gets prefabs that have the {@link org.terasology.workstationInGameHelp.components.ParticipateInItemCategoryInGameHelpComponent}.
         Assets.list(Prefab.class).stream()
                 .map(x -> Assets.get(x, Prefab.class).get())
                 .filter(x -> x.hasComponent(ParticipateInItemCategoryInGameHelpComponent.class))
@@ -64,6 +78,8 @@ public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem 
         for (WorkstationProcess process : workstationRegistry.getWorkstationProcesses(processTypesWithAutoRegistration)) {
             if (process instanceof DescribeProcess) {
                 DescribeProcess processRelatedAssets = (DescribeProcess) process;
+                //adds input related workstation processes and resource urns to inputAssetsToWorkstationProcesses.
+                //creates and adds input processes help items to the registry.
                 for (ProcessPartDescription processPartDescription : processRelatedAssets.getInputDescriptions()) {
                     if (processPartDescription.getResourceUrn() != null) {
                         inputAssetsToWorkstationProcesses.put(processPartDescription.getResourceUrn(), process);
@@ -73,6 +89,9 @@ public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem 
                         }
                     }
                 }
+                //adds output related workstation processes and resource urns to inputAssetsToWorkstationProcesses.
+                //creates and adds output processes help items to the registry.
+
                 for (ProcessPartDescription processPartDescription : processRelatedAssets.getOutputDescriptions()) {
                     if (processPartDescription.getResourceUrn() != null) {
                         outputAssetsToWorkstationProcesses.put(processPartDescription.getResourceUrn(), process);
@@ -86,11 +105,23 @@ public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem 
         }
     }
 
+    /**
+     * Gets all input related workstation processes associated with resourceUrn.
+     *
+     * @param resourceUrn the resource urn that the workstation processes are associated with.
+     * @return a collection of {@link org.terasology.workstation.process.WorkstationProcess}s.
+     */
     @Override
     public Collection<WorkstationProcess> getInputRelatedWorkstationProcesses(ResourceUrn resourceUrn) {
         return inputAssetsToWorkstationProcesses.get(resourceUrn);
     }
 
+    /**
+     * Gets all output related workstation processes associated with resourceUrn.
+     *
+     * @param resourceUrn the resource urn that the workstation processes are associated with.
+     * @return a collection of {@link org.terasology.workstation.process.WorkstationProcess}s.
+     */
     @Override
     public Collection<WorkstationProcess> getOutputRelatedWorkstationProcesses(ResourceUrn resourceUrn) {
         return outputAssetsToWorkstationProcesses.get(resourceUrn);

@@ -20,8 +20,23 @@ import org.terasology.workstation.process.WorkstationProcess;
 
 import java.util.Collection;
 
+/**
+ * Cache of all workstation processes. Used for getting workstation processes associated with a resource urn.
+ */
 public interface WorkstationProcessRelatedAssetCache {
+    /**
+     * Gets all input workstation processes related to the resourceUrn.
+     *
+     * @param resourceUrn the resource urn that the workstation processes are associated with.
+     * @return a collection of {@link org.terasology.workstation.process.WorkstationProcess}s.
+     */
     Collection<WorkstationProcess> getInputRelatedWorkstationProcesses(ResourceUrn resourceUrn);
 
+    /**
+     * Gets all output workstation processes related to resourceUrn.
+     *
+     * @param resourceUrn the resource urn that the workstation processes are associated with.
+     * @return a collection of {@link org.terasology.workstation.process.WorkstationProcess}s.
+     */
     Collection<WorkstationProcess> getOutputRelatedWorkstationProcesses(ResourceUrn resourceUrn);
 }

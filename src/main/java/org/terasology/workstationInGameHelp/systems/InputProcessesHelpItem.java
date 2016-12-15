@@ -33,11 +33,26 @@ import org.terasology.workstationInGameHelp.WorkstationProcessRelatedAssetCache;
 
 import java.util.List;
 
+/**
+ * Contains help item information for input related workstation processes for resourceUrn.
+ */
 public class InputProcessesHelpItem implements HelpItem {
+    /** The resource urn to get the help information from. */ 
     ResourceUrn resourceUrn;
+
+    /** Reference to the {@link org.terasology.workstationInGameHelp.WorkstationProcessRelatedAssetCache}. Used for getting workstation processes associated with resourceUrn. */
     WorkstationProcessRelatedAssetCache workstationProcessRelatedAssetCache;
+    
+    /** Reference to the workstation registry. */
     WorkstationRegistry workstationRegistry;
 
+    /**
+     * Constructor that sets the instance variables from the given parameters.
+     *
+     * @param resourceUrn the resource urn to set.
+     * @param workstationProcessRelatedAssetCache the workstation process related asset cache to set.
+     * @param workstationRegistry the workstation registry to set.
+     */
     public InputProcessesHelpItem(
             ResourceUrn resourceUrn,
             WorkstationProcessRelatedAssetCache workstationProcessRelatedAssetCache,
@@ -47,18 +62,34 @@ public class InputProcessesHelpItem implements HelpItem {
         this.workstationRegistry = workstationRegistry;
     }
 
+    /**
+     * Gets the title of this help item.
+     * 
+     * @return the title of this help item.
+     */
     @Override
     public String getTitle() {
         return "Used to Create";
     }
 
+    /**
+     * Gets the category of this help item.
+     *
+     * @return the category of this help item.
+     */
     @Override
     public String getCategory() {
         return "";
     }
 
+    /**
+     * Gets data for input workstation processes that are associated with resourceUrn. 
+     *
+     * @return a sorted iterable of paragraph data.
+     */
     @Override
     public Iterable<ParagraphData> getParagraphs() {
+        //gets and sorts a list of input related workstation processes associated with resourceUrn
         List<ParagraphData> result = Lists.newLinkedList();
         List<WorkstationProcess> relatedWorkstationProcesses = Lists.newLinkedList(workstationProcessRelatedAssetCache.getInputRelatedWorkstationProcesses(resourceUrn));
         relatedWorkstationProcesses.sort((x, y) -> x.getProcessType().compareTo(y.getProcessType()));
@@ -79,6 +110,12 @@ public class InputProcessesHelpItem implements HelpItem {
         return result;
     }
 
+    /**
+     * Gets the description of the workstation process. 
+     *
+     * @param workstationProcess the workstation process to get the description from. 
+     * @return a list of paragraph data for workstationProcess.
+     */
     static List<ParagraphData> getWorkStationProcessParagraphData(WorkstationProcess workstationProcess) {
         List<ParagraphData> processParagraphData = Lists.newLinkedList();
 
@@ -122,6 +159,12 @@ public class InputProcessesHelpItem implements HelpItem {
         return processParagraphData;
     }
 
+    /**
+     * Compares this to another object to see if it is equal.
+     *
+     * @param o the object to compare to.
+     * @return true if the object is also an input processes help item and has the same resource urn, false if otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -134,6 +177,11 @@ public class InputProcessesHelpItem implements HelpItem {
         return true;
     }
 
+    /**
+     * Gets the hashcode from resourceUrn.
+     *
+     * @return the hashcode of this.
+     */
     @Override
     public int hashCode() {
         return resourceUrn.hashCode();
