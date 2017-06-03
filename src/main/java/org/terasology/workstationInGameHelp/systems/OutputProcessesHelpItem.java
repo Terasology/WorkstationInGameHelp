@@ -17,7 +17,7 @@ package org.terasology.workstationInGameHelp.systems;
 
 import com.google.common.collect.Lists;
 import org.terasology.assets.ResourceUrn;
-import org.terasology.inGameHelp.components.HelpItem;
+import org.terasology.inGameHelpAPI.components.HelpItem;
 import org.terasology.rendering.nui.widgets.browser.data.ParagraphData;
 import org.terasology.rendering.nui.widgets.browser.data.basic.FlowParagraphData;
 import org.terasology.rendering.nui.widgets.browser.data.basic.flow.TextFlowRenderable;

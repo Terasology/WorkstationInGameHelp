@@ -23,7 +23,7 @@ import org.terasology.assets.ResourceUrn;
 import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.inGameHelp.ItemsCategoryInGameHelpRegistry;
+import org.terasology.inGameHelpAPI.ItemsCategoryInGameHelpRegistry;
 import org.terasology.registry.In;
 import org.terasology.registry.Share;
 import org.terasology.workstation.process.DescribeProcess;
@@ -43,7 +43,7 @@ import java.util.Set;
 @RegisterSystem
 @Share(WorkstationProcessRelatedAssetCache.class)
 public class WorkstationItemsInGameHelpCommonSystem extends BaseComponentSystem implements WorkstationProcessRelatedAssetCache {
-    /** Reference to the {@link org.terasology.inGameHelp.ItemsCategoryInGameHelpRegistry} that is used to add workstation help items. */
+    /** Reference to the {@link org.terasology.inGameHelpAPI.ItemsCategoryInGameHelpRegistry} that is used to add workstation help items. */
     @In
     ItemsCategoryInGameHelpRegistry itemsCategoryInGameHelpRegistry;
     
