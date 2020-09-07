@@ -16,8 +16,7 @@
 package org.terasology.workstationInGameHelp.systems;
 
 import com.google.common.collect.Lists;
-import org.terasology.utilities.Assets;
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.inGameHelpAPI.components.HelpItem;
 import org.terasology.inGameHelpAPI.ui.WidgetFlowRenderable;
 import org.terasology.rendering.assets.texture.TextureRegion;
@@ -25,6 +24,7 @@ import org.terasology.rendering.nui.widgets.browser.data.ParagraphData;
 import org.terasology.rendering.nui.widgets.browser.data.basic.FlowParagraphData;
 import org.terasology.rendering.nui.widgets.browser.data.basic.flow.ImageFlowRenderable;
 import org.terasology.rendering.nui.widgets.browser.data.basic.flow.TextFlowRenderable;
+import org.terasology.utilities.Assets;
 import org.terasology.workstation.process.DescribeProcess;
 import org.terasology.workstation.process.ProcessPartDescription;
 import org.terasology.workstation.process.WorkstationProcess;
