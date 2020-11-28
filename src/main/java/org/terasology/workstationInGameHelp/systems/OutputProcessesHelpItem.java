@@ -102,14 +102,16 @@ public class OutputProcessesHelpItem implements HelpItem {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof OutputProcessesHelpItem)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof OutputProcessesHelpItem)) {
+            return false;
+        }
 
         OutputProcessesHelpItem that = (OutputProcessesHelpItem) o;
 
-        if (!resourceUrn.equals(that.resourceUrn)) return false;
-
-        return true;
+        return resourceUrn.equals(that.resourceUrn);
     }
 
     /**

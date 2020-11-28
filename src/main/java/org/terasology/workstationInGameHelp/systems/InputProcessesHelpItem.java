@@ -102,14 +102,16 @@ public class InputProcessesHelpItem implements HelpItem {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof InputProcessesHelpItem)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof InputProcessesHelpItem)) {
+            return false;
+        }
 
         InputProcessesHelpItem that = (InputProcessesHelpItem) o;
 
-        if (!resourceUrn.equals(that.resourceUrn)) return false;
-
-        return true;
+        return resourceUrn.equals(that.resourceUrn);
     }
 
     /**
