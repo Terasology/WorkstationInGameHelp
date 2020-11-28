@@ -68,11 +68,11 @@ public final class WorkstationProcesses {
 
             DescribeProcess describeProcess = (DescribeProcess) workstationProcess;
 
-            List<FlowRenderable<?>> inputs = describeProcess.getInputDescriptions().stream()
+            List<FlowRenderable> inputs = describeProcess.getInputDescriptions().stream()
                     .map(WorkstationProcesses::renderableFromDescription)
                     .collect(joining(plus));
 
-            List<FlowRenderable<?>> outputs = describeProcess.getOutputDescriptions().stream()
+            List<FlowRenderable> outputs = describeProcess.getOutputDescriptions().stream()
                     .map(WorkstationProcesses::renderableFromDescription)
                     .collect(joining(plus));
 
