@@ -1,14 +1,23 @@
 {
-    "id": "WorkstationInGameHelp",
-    "version": "1.0.0",
-    "author": "Josharias, xrtariq2594, Cervator",
-    "displayName": "Workstation - In-Game Help",
-    "description": "A module which ties workstation processes to items in the InGameHelp module.",
-    "dependencies": [
-        { "id": "InGameHelp", "minVersion": "1.1.0" },
-        { "id": "InGameHelpAPI", "minVersion": "1.0.0" },
-        { "id": "Workstation", "minVersion": "1.1.0" }
-    ],
-    "serverSideOnly": false,
-    "isAugmentation": true
+  "id": "WorkstationInGameHelp",
+  "version": "1.1.0-SNAPSHOT",
+  "author": "Josharias, xrtariq2594, Cervator",
+  "displayName": "Workstation - In-Game Help",
+  "description": "A module which ties workstation processes to items in the InGameHelp module.",
+  "dependencies": [
+    {
+      "id": "InGameHelp",
+      "minVersion": "1.1.0"
+    },
+    {
+      "id": "InGameHelpAPI",
+      "minVersion": "1.0.0"
+    },
+    {
+      "id": "Workstation",
+      "minVersion": "1.1.0"
+    }
+  ],
+  "serverSideOnly": false,
+  "isAugmentation": true
 }
