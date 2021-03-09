@@ -4,14 +4,14 @@
 package org.terasology.workstationInGameHelp.ui;
 
 import com.google.common.collect.Lists;
+import org.terasology.engine.rendering.assets.texture.TextureRegion;
+import org.terasology.engine.rendering.nui.widgets.browser.data.ParagraphData;
+import org.terasology.engine.rendering.nui.widgets.browser.data.basic.FlowParagraphData;
+import org.terasology.engine.rendering.nui.widgets.browser.data.basic.flow.FlowRenderable;
+import org.terasology.engine.rendering.nui.widgets.browser.data.basic.flow.ImageFlowRenderable;
+import org.terasology.engine.rendering.nui.widgets.browser.data.basic.flow.TextFlowRenderable;
+import org.terasology.engine.utilities.Assets;
 import org.terasology.inGameHelpAPI.ui.WidgetFlowRenderable;
-import org.terasology.rendering.assets.texture.TextureRegion;
-import org.terasology.rendering.nui.widgets.browser.data.ParagraphData;
-import org.terasology.rendering.nui.widgets.browser.data.basic.FlowParagraphData;
-import org.terasology.rendering.nui.widgets.browser.data.basic.flow.FlowRenderable;
-import org.terasology.rendering.nui.widgets.browser.data.basic.flow.ImageFlowRenderable;
-import org.terasology.rendering.nui.widgets.browser.data.basic.flow.TextFlowRenderable;
-import org.terasology.utilities.Assets;
 import org.terasology.workstation.process.DescribeProcess;
 import org.terasology.workstation.process.ProcessPartDescription;
 import org.terasology.workstation.process.WorkstationProcess;

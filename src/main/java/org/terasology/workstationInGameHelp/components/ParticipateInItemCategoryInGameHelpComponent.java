@@ -15,7 +15,7 @@
  */
 package org.terasology.workstationInGameHelp.components;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 /**
  * Component for items that have help information for a workstation help system.

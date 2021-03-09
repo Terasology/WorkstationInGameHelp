@@ -3,8 +3,8 @@
 package org.terasology.workstationInGameHelp.systems;
 
 import org.terasology.assets.ResourceUrn;
+import org.terasology.engine.rendering.nui.widgets.browser.data.ParagraphData;
 import org.terasology.inGameHelpAPI.components.HelpItem;
-import org.terasology.rendering.nui.widgets.browser.data.ParagraphData;
 import org.terasology.workstation.process.WorkstationProcess;
 import org.terasology.workstation.system.WorkstationRegistry;
 import org.terasology.workstationInGameHelp.WorkstationProcessRelatedAssetCache;
