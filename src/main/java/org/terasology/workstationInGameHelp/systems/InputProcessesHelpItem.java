@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package org.terasology.workstationInGameHelp.systems;
 
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.engine.rendering.nui.widgets.browser.data.ParagraphData;
 import org.terasology.inGameHelpAPI.components.HelpItem;
 import org.terasology.workstation.process.WorkstationProcess;

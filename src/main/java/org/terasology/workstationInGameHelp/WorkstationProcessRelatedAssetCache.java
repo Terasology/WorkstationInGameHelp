@@ -15,7 +15,7 @@
  */
 package org.terasology.workstationInGameHelp;
 
-import org.terasology.assets.ResourceUrn;
+import org.terasology.gestalt.assets.ResourceUrn;
 import org.terasology.workstation.process.WorkstationProcess;
 
 import java.util.Collection;
