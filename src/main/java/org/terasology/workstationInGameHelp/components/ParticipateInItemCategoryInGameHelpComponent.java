@@ -9,4 +9,8 @@ import org.terasology.gestalt.entitysystem.component.Component;
  * Entities that have this component are processed in {@link org.terasology.workstationInGameHelp.systems.WorkstationItemsInGameHelpCommonSystem}.
  */
 public class ParticipateInItemCategoryInGameHelpComponent implements Component<ParticipateInItemCategoryInGameHelpComponent> {
+    @Override
+    public void copy(ParticipateInItemCategoryInGameHelpComponent other) {
+
+    }
 }
