@@ -10,7 +10,7 @@ import org.terasology.gestalt.entitysystem.component.Component;
  */
 public class ParticipateInItemCategoryInGameHelpComponent implements Component<ParticipateInItemCategoryInGameHelpComponent> {
     @Override
-    public void copy(ParticipateInItemCategoryInGameHelpComponent other) {
+    public void copyFrom(ParticipateInItemCategoryInGameHelpComponent other) {
 
     }
 }
